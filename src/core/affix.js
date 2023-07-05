@@ -1,4 +1,10 @@
-import { getDataId, cleanTitleAndValue, cleanTypeTextArray, getPowerIncrease } from './index.js';
+import {
+    removeSkipAffixIds,
+    getDataId,
+    cleanTitleAndValue,
+    cleanTypeTextArray,
+    getPowerIncrease
+} from './index.js';
 
 /*
 [
@@ -65,7 +71,7 @@ export const ConvertToJSON = (document) => {
         data = data.concat(list);
     });
 
-    return data;
+    return removeSkipAffixIds(data);
 }
 
 
@@ -95,7 +101,7 @@ export const ConvertToI18n = (document) => {
         return acc;
     }, {});
 
-    return data;
+    return removeSkipAffixIds(data);
 }
 
 export default {

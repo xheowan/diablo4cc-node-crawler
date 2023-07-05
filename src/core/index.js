@@ -7,8 +7,36 @@ export const _di = (name, elm) => {
     });
 }
 
-
 export const uniqueStringArray = (array) => Array.from(new Set(array));
+
+
+// skip affix for test
+const skipAffixIds = [
+    "1003299", // TEST Hit Effect
+    "577283", // of Legend 1
+    "577284", // of Legend 2
+    "593670", // (PH) of 100% Dodge During Evade
+    "593667", //(PH) of 3 Evade Charges
+    "593668", //(PH) of Attack Reset Evade
+    "585349" // of Hammering
+];
+
+export const removeSkipAffixIds = (data) => {
+    if (typeof data !== 'object' || data === null)
+        return data;
+
+    if (Array.isArray(data)) {
+        return data.filter(item => !skipAffixIds.includes(item.id));
+    } else {
+        return Object.keys(data).reduce((acc, key) => {
+            if (!skipAffixIds.includes(key)) {
+                acc[key] = data[key];
+            }
+
+            return acc;
+        }, {});
+    }
+};
 
 
 export const getDataId = ($context) => {
@@ -17,7 +45,6 @@ export const getDataId = ($context) => {
         const elm = $context.querySelector('[data-hover], [data-hover2]');
         if (!elm) {
             
-
             _di('$context', $context);
             _di('elm', elm);
 
@@ -30,6 +57,7 @@ export const getDataId = ($context) => {
     // id
     return data.split('/')[1];
 }
+
 
 const dicReplaceValue = {
     '[PowerTag.Barbarian_Earthquake."Script Formula 1"]': {
@@ -89,6 +117,7 @@ export const cleanTitleAndValue = (text, id = null) => {
     }
 }
 
+
 export const getAspectPrefix = (text) => {
     if (text.includes(' Aspect'))
         text = '{0} ' + text.replace(' Aspect', '');
@@ -97,6 +126,7 @@ export const getAspectPrefix = (text) => {
     
     return text.trim();
 }
+
 
 // affix
 const dicItemType = {
@@ -139,6 +169,7 @@ export const cleanTypeTextArray = (textArray) => {
     return uniqueStringArray(list);
 }
 
+
 const dicTags = {
     'codexofpower': 'codex'
 }
@@ -178,6 +209,7 @@ export const getPowerIncrease = (keyValues) => {
         return acc;
     }, {});
 }
+
 
 export const dataReduceAndSort = (list) => {
     return list

@@ -19,7 +19,7 @@ npm run fetch
 
 ### JSON Files structures
 
-files/data/affix.json
+files/data/affixes.json
 ```json
 [
     {
@@ -30,8 +30,7 @@ files/data/affix.json
         ],
         "requiredItemType": ["amulet", "chestarmor", "helm", "pants"],
         "tags": ["basic"]
-    },
-    ...
+    }
 ]
 ``` 
 

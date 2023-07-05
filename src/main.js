@@ -17,7 +17,7 @@ const fullAffixJson = dataReduceAndSort([...affixJson, ...aspectJson]);
 console.log('# saving to affix.json', fullAffixJson.length);
 saveJsonFile(
     fullAffixJson,
-    './files/data/affix.json'
+    './files/data/affixes.json'
 );
 
 
