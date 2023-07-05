@@ -71,10 +71,10 @@ export const ConvertToJSON = (document) => {
 
 /*
 {
-    "577013": "法力上限 +{0}",
-    "577017": "怒氣上限 +{0}",
-    "577021": "冷卻時間縮短 {0}%",
-    "577033": "魂能消耗降低 {0}%",
+    "577013": "+{0} Maximum Mana",
+    "577017": "+{0} Maximum Fury",
+    "577021": "{0}% Cooldown Reduction",
+    "577033": "{0}% Essence Cost Reduction",
     ....
 }
 */
