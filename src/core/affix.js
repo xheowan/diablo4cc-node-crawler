@@ -14,7 +14,7 @@ import {
         "valueRange": [
             "[3.1 – 7.3]"
         ],
-        "requiredItemType": ["amulet", "chestarmor", "helm", "pants"],
+        "requiredItemType": ["amulet", "chest_armor", "helm", "pants"],
         "tags": ["basic"]
     },
     ...
@@ -52,11 +52,12 @@ export const ConvertToJSON = (document) => {
             // const powerIncrease = getPowerIncrease(powerKeyValues);
     
             // item type
+            
             const requiredItemType = cleanTypeTextArray(
+                "affix",
                 [...elm.querySelector('.card-body').querySelectorAll('a')]
                     .map(a => a.getAttribute('href'))
             );
-
 
             return {
                 id,

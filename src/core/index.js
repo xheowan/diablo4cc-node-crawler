@@ -130,7 +130,7 @@ export const getAspectPrefix = (text) => {
 
 // affix
 const dicItemType = {
-    'chest_armor': 'chestarmor',
+    // 'chest_armor': 'chest_armor',
     'two-handed_axe': 'axe2h',
     'hand_crossbow': 'crossbow',
     'daggeroffhand': 'dagger',
@@ -139,18 +139,19 @@ const dicItemType = {
     'two-handed_sword': 'sword2h'
 }
 
-export const cleanTypeTextArray = (textArray) => {
+export const cleanTypeTextArray = (from, textArray) => {
     const list = textArray.reduce((acc, text) => {
         const type = text
             .toLocaleLowerCase()
-            .replace('[+100%]', '')
-            .replace('[+50%]', '');
+            .replace(' [+100%]', '')
+            .replace(' [+50%]', '');
 
 
-        if (dicItemType.hasOwnProperty(type)) {
-            // for affix
-            acc.push(dicItemType[type]);
-        } else {
+        if (from === 'affix') {
+            acc.push(
+                dicItemType.hasOwnProperty(type) ? dicItemType[type] : type
+            )
+        } else if (from === 'aspect') {
             // for aspect
             if (type == 'offhand') {
                 acc = acc.concat(['focus', 'totem']);
@@ -159,7 +160,9 @@ export const cleanTypeTextArray = (textArray) => {
             } else if (type == '2h weapon') {
                 acc = acc.concat(['axe2h', 'bow', 'crossbow', 'mace2h', 'polearm', 'scythe2h', 'staff', 'sword2h']);
             } else if (type == 'chest armor') {
-                acc.push('chestarmor');
+                acc.push('chest_armor');
+            } else {
+                acc.push(type);
             }
         }
 
@@ -223,11 +226,15 @@ export const dataReduceAndSort = (list) => {
                 }
 
                 if (item.valueRange && Array.isArray(item.valueRange)) {
-                    exists.valueRange = uniqueStringArray([...item.valueRange, ...exists.valueRange]);
+                    exists.valueRange = uniqueStringArray([...exists.valueRange, ...item.valueRange]);
+                }
+
+                if (item.requiredItemType && Array.isArray(item.requiredItemType)) {
+                    exists.requiredItemType = uniqueStringArray([...exists.requiredItemType, ...item.requiredItemType]);
                 }
 
                 if (item.tags && Array.isArray(item.tags)) {
-                    exists.tags = uniqueStringArray([...item.tags, ...exists.tags]);
+                    exists.tags = uniqueStringArray([...exists.tags, ...item.tags]);
                 }
             }
 

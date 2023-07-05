@@ -15,7 +15,7 @@ import {
         "valueRange": [
             "[3.1 – 7.3]"
         ],
-        "requiredItemType": ["amulet", "chestarmor", "helm", "pants"],
+        "requiredItemType": ["amulet", "chest_armor", "helm", "pants"],
         "tags": ["basic"]
     },
     ...
@@ -57,8 +57,23 @@ export const ConvertToJSON = (document) => {
                 id
             );
             
-            const typeTextArray = $root.querySelector('div > div')?.textContent.replaceAll(' ', '').split(',') || [];
-            const requiredItemType = cleanTypeTextArray(typeTextArray);
+            let requiredItemType = [];
+            const elmTypeText = $root.querySelector('div > div');
+            if (elmTypeText) {
+                const removeSpan = elmTypeText.querySelector('span');
+                elmTypeText.removeChild(removeSpan);
+
+                requiredItemType = cleanTypeTextArray(
+                    "aspect",
+                    elmTypeText.textContent.trim().split(', ') || []
+                );
+            }
+            
+            // const typeTextArray = $root.querySelector('div > div')?.textContent.replaceAll(' ', '').split(',') || [];
+            // console.log(typeTextArray);
+            // const requiredItemType = cleanTypeTextArray(
+            //     $root.querySelector('div > div')?.textContent.replaceAll(' ', '').split(',') || []
+            // );
             
             return {
                 id,

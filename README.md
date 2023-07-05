@@ -28,7 +28,7 @@ files/data/affixes.json
         "valueRange": [
             "[3.1 – 7.3]"
         ],
-        "requiredItemType": ["amulet", "chestarmor", "helm", "pants"],
+        "requiredItemType": ["amulet", "chest_armor", "helm", "pants"],
         "tags": ["basic"]
     }
 ]
