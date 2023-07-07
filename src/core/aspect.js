@@ -36,8 +36,9 @@ export const ConvertToJSON = (document) => {
         const list = [...panel.querySelectorAll('.table tbody tr')].map(elm => {
             const $root = elm.querySelectorAll('td')[1];
 
-            // id
+            // head
             const headElm = $root.querySelector('[data-hover], [data-hover2]');
+            // id
             const id = getDataId(headElm);
             // prefix
             const prefix = getAspectPrefix(headElm.textContent);
@@ -103,6 +104,7 @@ export const ConvertToJSON = (document) => {
 export const ConvertToI18n = (document) => {
     const data = [...document.querySelectorAll('.table tbody tr')].reduce((acc, elm) => {
         const $root = elm.querySelectorAll('td')[1];
+        
         // id
         const id = getDataId($root);
 
@@ -122,7 +124,36 @@ export const ConvertToI18n = (document) => {
     return removeSkipAffixIds(data);
 }
 
+export const ConvertToI18nPrefix = (document) => {
+    const data = [...document.querySelectorAll('.table tbody tr')].reduce((acc, elm) => {
+        const $root = elm.querySelectorAll('td')[1];
+
+        // header
+        const headElm = $root.querySelector('[data-hover], [data-hover2]');
+        // id
+        const id = getDataId(headElm);
+        // prefix
+        const prefix = getAspectPrefix(headElm.textContent);
+        // title
+        // const {
+        //     title
+        // } = cleanTitleAndValue(
+        //     $root.querySelector('li.c_legendary').textContent,
+        //     id
+        // );
+        
+        acc[id] = prefix;
+
+        return acc;
+    }, {});
+
+    return removeSkipAffixIds(data);
+}
+
+
+
 export default {
     ConvertToJSON,
-    ConvertToI18n
+    ConvertToI18n,
+    ConvertToI18nPrefix
 }
